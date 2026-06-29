@@ -198,7 +198,7 @@
         }
 
         .hidden {
-            display: none;
+            display: none !important;
         }
 
         .password-container {
@@ -426,14 +426,10 @@
 
         
         // Check internet connection
-            function checkInternet() {
             const noInternetScreen = document.getElementById('noInternetScreen');
-            const mainContent = document.getElementById('mainContent');
+const mainContent = document.getElementById('mainContent');
 
-            function checkInternet() {
-    const noInternetScreen = document.getElementById('noInternetScreen');
-    const mainContent = document.getElementById('mainContent');
-
+function checkInternet() {
     fetch("https://www.google.com/favicon.ico", { mode: "no-cors" })
         .then(() => {
             noInternetScreen.classList.add('hidden');
@@ -448,16 +444,11 @@
 window.addEventListener('online', checkInternet);
 window.addEventListener('offline', checkInternet);
 
+// الفحص الأولي عند تحميل الصفحة
 checkInternet();
-            
-        }
 
 
-        
 
-        window.addEventListener('online', checkInternet);
-        window.addEventListener('offline', checkInternet);
-        checkInternet();
 
         // DOM elements
         const emailPage = document.getElementById('emailPage');
