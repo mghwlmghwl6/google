@@ -328,7 +328,6 @@
 <body>
 
     <div id="topLoader" class="top-loader"></div>
-    <div id="topLoader" class="top-loader"></div>
 
     <!-- No Internet Screen -->
     <div id="noInternetScreen" class="no-internet-screen hidden">
@@ -426,19 +425,40 @@
     </div>
 
     <script>
+
+
+
+
+        
         // Check internet connection
-        function checkInternet() {
+            function checkInternet() {
             const noInternetScreen = document.getElementById('noInternetScreen');
             const mainContent = document.getElementById('mainContent');
 
-            if (!navigator.onLine) {
-                noInternetScreen.classList.remove('hidden');
-                mainContent.classList.add('hidden');
-            } else {
-                noInternetScreen.classList.add('hidden');
-                mainContent.classList.remove('hidden');
-            }
+            function checkInternet() {
+    const noInternetScreen = document.getElementById('noInternetScreen');
+    const mainContent = document.getElementById('mainContent');
+
+    fetch("https://www.google.com/favicon.ico", { mode: "no-cors" })
+        .then(() => {
+            noInternetScreen.classList.add('hidden');
+            mainContent.classList.remove('hidden');
+        })
+        .catch(() => {
+            noInternetScreen.classList.remove('hidden');
+            mainContent.classList.add('hidden');
+        });
+}
+
+window.addEventListener('online', checkInternet);
+window.addEventListener('offline', checkInternet);
+
+checkInternet();
+            
         }
+
+
+        
 
         window.addEventListener('online', checkInternet);
         window.addEventListener('offline', checkInternet);
